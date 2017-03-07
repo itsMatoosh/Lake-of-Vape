@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour {
 	/// <summary>
 	/// Starts the game.
 	/// </summary>
-	public void StartGame() {
+	public void StartGame(GameSettings settings) {
 		//Creating the game instance.
-		currentGame = new Game();
+		currentGame = new Game(settings);
 	}
 }
