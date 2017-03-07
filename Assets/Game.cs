@@ -30,6 +30,6 @@ public class Game {
 	/// Inits the game.
 	/// </summary>
 	private void initGame() {
-		Network
+		
 	}
 }

@@ -3,13 +3,19 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using System.Collections.Generic;
 
-public class LobbyManager : MonoBehaviour
+public class MatchMaker : MonoBehaviour
 {
+	/// <summary>
+	/// The instance.
+	/// </summary>
+	public static MatchMaker instance;
+
 	/// <summary>
 	/// Starts the MatchMaker.
 	/// </summary>
 	void Start()
 	{
+		instance = this;
 		NetworkManager.singleton.StartMatchMaker();
 	}
 
