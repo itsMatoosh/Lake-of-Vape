@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 /// <summary>
 /// Represents a single game.
@@ -21,5 +22,14 @@ public class Game {
 	/// </summary>
 	public Game (GameSettings settings) {
 		this.settings = settings;
+
+		initGame ();
+	}
+
+	/// <summary>
+	/// Inits the game.
+	/// </summary>
+	private void initGame() {
+		Network
 	}
 }
