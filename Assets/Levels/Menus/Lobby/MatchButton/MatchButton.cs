@@ -12,8 +12,8 @@ public class MatchButton : MonoBehaviour {
 	/// Setup the specified info.
 	/// </summary>
 	/// <param name="info">Info.</param>
-	public void setup(string matchName, MatchInfo info) {
-		//matchName. = matchName;
-
+	public void setup(string matchName, int online) {
+		this.matchName.text = matchName;
+		onlinePlayers.text = online + "/10";
 	}
 }

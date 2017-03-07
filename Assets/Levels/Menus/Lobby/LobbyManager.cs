@@ -15,6 +15,10 @@ public class LobbyManager : MonoBehaviour {
 	/// The match button prefab.
 	/// </summary>
 	public Object matchButtonPrefab;
+	/// <summary>
+	/// The match button holder.
+	/// </summary>
+	public Transform matchButtonHolder;
 
 	void Start() {
 		//Listing all the active games.
@@ -39,6 +43,6 @@ public class LobbyManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="info">Info.</param>
 	public void AddMatchButton(MatchInfo info) {
-
+		Instantiate (matchButtonPrefab, matchButtonHolder);
 	}
 }
