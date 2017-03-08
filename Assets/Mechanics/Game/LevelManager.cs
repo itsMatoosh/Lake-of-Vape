@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="tieBreaker">If set to <c>true</c> will load a tiebreaker level.</param>
 	/// <param name="blackList">Levels not to load.</param>
-	public static void LoadLevel(bool tieBreaker, List<string> blackList) {
+	public static string LoadLevel(bool tieBreaker, List<string> blackList) {
 		string chosenLevel = "";
 
 		while (chosenLevel == "") {
@@ -40,5 +40,7 @@ public class LevelManager : MonoBehaviour {
 		if (chosenLevel != "") {
 			SceneManager.LoadSceneAsync (chosenLevel, LoadSceneMode.Additive);
 		}
+
+		return chosenLevel;
 	}
 }

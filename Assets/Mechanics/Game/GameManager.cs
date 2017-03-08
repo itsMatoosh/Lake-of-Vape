@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the game.
+/// Server-only.
+/// </summary>
 public class GameManager : MonoBehaviour {
 	/// <summary>
 	/// Currently running game.

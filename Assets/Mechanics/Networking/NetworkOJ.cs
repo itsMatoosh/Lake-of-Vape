@@ -15,4 +15,12 @@ public class NetworkOJ : NetworkManager {
 		//Starting the game.
 		GetComponent<GameManager>().StartGame(CreateMatchManager.currentGameSettings);
 	}
+
+	public override void OnClientConnect (NetworkConnection conn)
+	{
+		base.OnClientConnect (conn);
+
+		//Loading the level?
+
+	}
 }

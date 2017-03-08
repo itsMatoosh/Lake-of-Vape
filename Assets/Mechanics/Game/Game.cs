@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 /// <summary>
 /// Represents a single game.
+/// Present on the server only.
 /// </summary>
 public class Game {
 	/// <summary>
@@ -23,13 +24,26 @@ public class Game {
 	public Game (GameSettings settings) {
 		this.settings = settings;
 
-		initGame ();
+		InitGame ();
 	}
 
 	/// <summary>
 	/// Inits the game.
 	/// </summary>
-	private void initGame() {
-		
+	private void InitGame() {
+		//Starting a new round.
+		StartNextRound();
+	}
+	/// <summary>
+	/// Loads and the next level.
+	/// </summary>
+	public void LoadNextLevel() {
+
+	}
+	/// <summary>
+	/// Starts the next round.
+	/// </summary>
+	public void StartNextRound() {
+
 	}
 }
