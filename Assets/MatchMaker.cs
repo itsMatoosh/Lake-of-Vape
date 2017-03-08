@@ -25,7 +25,7 @@ public class MatchMaker : MonoBehaviour
 	/// <param name="matchName">Match name.</param>
 	public void CreateInternetMatch(string matchName)
 	{
-		NetworkManager.singleton.matchMaker.CreateMatch(matchName, 4, true, "", "", "", 0, 0, OnInternetMatchCreate);
+		NetworkManager.singleton.matchMaker.CreateMatch(matchName, (uint)CreateMatchManager.currentGameSettings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
 	}
 
 	/// <summary>
