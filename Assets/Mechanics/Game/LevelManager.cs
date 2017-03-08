@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
-	/// <summary>
-	/// List of all the available normal levels.
-	/// </summary>
-	public static string[] normalLevels;
+    /// <summary>
+    /// List of all the available normal levels.
+    /// </summary>
+    public static string[] normalLevels =
+    {
+        "nm_malasarka"
+    };
 	/// <summary>
 	/// List of all the available tie breaker levels.
 	/// </summary>
@@ -18,7 +21,7 @@ public class LevelManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="tieBreaker">If set to <c>true</c> will load a tiebreaker level.</param>
 	/// <param name="blackList">Levels not to load.</param>
-	public static string LoadLevel(bool tieBreaker, List<string> blackList) {
+	public static Level LoadLevel(bool tieBreaker, List<string> blackList) {
 		string chosenLevel = "";
 
 		while (chosenLevel == "") {
@@ -32,7 +35,7 @@ public class LevelManager : MonoBehaviour {
 			} else {
 				chosenLevel = normalLevels[Random.Range(0, normalLevels.Length - 1)];
 			}
-			if (blackList.Contains (chosenLevel)) {
+			if (blackList != null && blackList.Contains (chosenLevel)) {
 				chosenLevel = "";
 			}
 		}
@@ -41,6 +44,6 @@ public class LevelManager : MonoBehaviour {
 			SceneManager.LoadSceneAsync (chosenLevel, LoadSceneMode.Additive);
 		}
 
-		return chosenLevel;
+		return new Level(chosenLevel);
 	}
 }

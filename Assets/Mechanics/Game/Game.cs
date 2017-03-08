@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -11,7 +10,7 @@ public class Game {
 	/// <summary>
 	/// Levels played during this game.
 	/// </summary>
-	public List<string> playedLevels;
+	public List<Level> playedLevels;
 	/// <summary>
 	/// Settings of this game.
 	/// </summary>
@@ -31,19 +30,40 @@ public class Game {
 	/// Inits the game.
 	/// </summary>
 	private void InitGame() {
+		//Loading the first level.
+		LoadNextLevel();
+
 		//Starting a new round.
 		StartNextRound();
 	}
 	/// <summary>
 	/// Loads and the next level.
 	/// </summary>
-	public void LoadNextLevel() {
+	public void LoadNextLevel() 
+	{
+        Level loadedLevel = LevelManager.LoadLevel(false, null);
 
+        if(loadedLevel != null)
+        {
+            NetworkOJ.singleton.ServerChangeScene(loadedLevel.name);
+            playedLevels.Add(loadedLevel);
+        }
+        else
+        {
+            Debug.LogError("Counldn't load the next level!");
+        }
 	}
 	/// <summary>
 	/// Starts the next round.
 	/// </summary>
 	public void StartNextRound() {
+
+	}
+
+	/// <summary>
+	/// Finishes the current round.
+	/// </summary>
+	public void FinishRound(string winner) {
 
 	}
 }
