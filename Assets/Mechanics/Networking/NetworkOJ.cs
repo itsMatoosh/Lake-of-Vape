@@ -18,9 +18,11 @@ public class NetworkOJ : NetworkManager {
 
 	public override void OnClientConnect (NetworkConnection conn)
 	{
-		base.OnClientConnect (conn);
-
-		//Loading the level?
-
-	}
+        //ClientScene.Ready (conn);
+        ClientScene.AddPlayer(0);
+    }
+    public override void OnClientSceneChanged(NetworkConnection conn)
+    {
+        base.OnClientSceneChanged(conn);
+    }
 }

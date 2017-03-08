@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		if (chosenLevel != "") {
-			SceneManager.LoadSceneAsync (chosenLevel, LoadSceneMode.Additive);
+			SceneManager.LoadSceneAsync (chosenLevel, LoadSceneMode.Single);
 		}
 
 		return new Level(chosenLevel);

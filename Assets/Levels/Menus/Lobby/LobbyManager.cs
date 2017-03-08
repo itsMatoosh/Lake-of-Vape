@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking.Match;
 
@@ -14,7 +11,7 @@ public class LobbyManager : MonoBehaviour {
 	/// <summary>
 	/// The match button prefab.
 	/// </summary>
-	public Object matchButtonPrefab;
+	public UnityEngine.Object matchButtonPrefab;
 	/// <summary>
 	/// The match button holder.
 	/// </summary>
@@ -23,13 +20,23 @@ public class LobbyManager : MonoBehaviour {
 	void Start() {
 		//Listing all the active games.
 		//TODO: Game name filtering.
-		instance = this;
 		RefreshMatches();
 	}
-	/// <summary>
-	/// Refreshs the matches.
-	/// </summary>
-	public void RefreshMatches() {
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    /// <summary>
+    /// Refreshs the matches.
+    /// </summary>
+    public void RefreshMatches() {
 		MatchMaker.instance.FindInternetMatch("");
 	}
 	/// <summary>
@@ -42,7 +49,18 @@ public class LobbyManager : MonoBehaviour {
 	/// Adds the match button.
 	/// </summary>
 	/// <param name="info">Info.</param>
-	public void AddMatchButton(MatchInfo info) {
-		Instantiate (matchButtonPrefab, matchButtonHolder);
+	public void AddMatchButton(MatchInfoSnapshot info) {
+		((GameObject)Instantiate (matchButtonPrefab, matchButtonHolder)).GetComponent<MatchButton>().Setup(info);
 	}
+
+    /// <summary>
+    /// Clears the match list.
+    /// </summary>
+    internal void ClearMatchList()
+    {
+        foreach(Transform button in matchButtonHolder)
+        {
+            Destroy(button.gameObject);
+        }
+    }
 }

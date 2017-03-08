@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using System.Collections.Generic;
+using System;
 
 public class MatchMaker : MonoBehaviour
 {
@@ -28,13 +29,13 @@ public class MatchMaker : MonoBehaviour
         NetworkManager.singleton.matchMaker.CreateMatch(settings.gameName, (uint)settings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
 	}
 
-	/// <summary>
-	/// Event called when the match is created.
-	/// </summary>
-	/// <param name="success">If set to <c>true</c> success.</param>
-	/// <param name="extendedInfo">Extended info.</param>
-	/// <param name="matchInfo">Match info.</param>
-	private void OnInternetMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
+    /// <summary>
+    /// Event called when the match is created.
+    /// </summary>
+    /// <param name="success">If set to <c>true</c> success.</param>
+    /// <param name="extendedInfo">Extended info.</param>
+    /// <param name="matchInfo">Match info.</param>
+    private void OnInternetMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
 	{
 		if (success)
 		{
@@ -72,10 +73,11 @@ public class MatchMaker : MonoBehaviour
 		{
 			if (matches.Count != 0)
 			{
-				//Debug.Log("A list of matches was returned");
-
-				//join the last server (just in case there are two...)
-				NetworkManager.singleton.matchMaker.JoinMatch(matches[matches.Count - 1].networkId, "", "", "", 0, 0, OnJoinInternetMatch);
+                LobbyManager.instance.ClearMatchList();
+				foreach(MatchInfoSnapshot match in matches)
+                {
+                    LobbyManager.instance.AddMatchButton(match);
+                }
 			}
 			else
 			{
@@ -94,7 +96,7 @@ public class MatchMaker : MonoBehaviour
 	/// <param name="success">If set to <c>true</c> success.</param>
 	/// <param name="extendedInfo">Extended info.</param>
 	/// <param name="matchInfo">Match info.</param>
-	private void OnJoinInternetMatch(bool success, string extendedInfo, MatchInfo matchInfo)
+	internal void OnJoinInternetMatch(bool success, string extendedInfo, MatchInfo matchInfo)
 	{
 		if (success)
 		{

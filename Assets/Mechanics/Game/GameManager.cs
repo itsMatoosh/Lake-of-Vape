@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 /// <summary>
 /// Manages the game.
@@ -12,11 +9,26 @@ public class GameManager : MonoBehaviour {
 	/// Currently running game.
 	/// </summary>
 	public static Game currentGame;
+    /// <summary>
+    /// Instance of the class.
+    /// </summary>
+    public static GameManager instance;
 
-	/// <summary>
-	/// Starts the game.
-	/// </summary>
-	public void StartGame(GameSettings settings) {
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        } else
+        {
+            Destroy(gameObject);
+        }
+    }
+    /// <summary>
+    /// Starts the game.
+    /// </summary>
+    public void StartGame(GameSettings settings) {
 		//Creating the game instance.
 		currentGame = new Game(settings);
 	}

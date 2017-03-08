@@ -1,0 +1,76 @@
+Initialize engine version: 5.5.2f1 (3829d7f588f3)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 780 (ID=0x1004)
+    Vendor:   NVIDIA
+    VRAM:     3039 MB
+    Driver:   21.21.13.7653
+Begin MonoManager ReloadAssembly
+Platform assembly: V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.186 seconds
+Platform assembly: V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: V:\Users\Mateusz Rębacz\Documents\GitHub\Lake-of-Vape\Built\LakeOfVape_Data\Managed\System.dll (this message is harmless)
+desktop: 2560x1440 59Hz; virtual: 2560x1440 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.872723 ms
+Current username: Anonymous
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.911803 ms
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 331.
+Total: 0.202911 ms (FindLiveObjects: 0.016611 ms CreateObjectMapping: 0.009711 ms MarkObjects: 0.169689 ms  DeleteObjects: 0.006644 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.646045 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 334.
+Total: 0.231278 ms (FindLiveObjects: 0.019677 ms CreateObjectMapping: 0.012522 ms MarkObjects: 0.195500 ms  DeleteObjects: 0.003322 ms)
+
+MatchMakingClient Create :https://mm.unet.unity3d.com/json/reply/CreateMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+No matches in requested room!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Created match successfully! xd
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Must call AddPlayer() with a connection the first time to become ready.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 1.422934 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 401.
+Total: 0.203166 ms (FindLiveObjects: 0.011500 ms CreateObjectMapping: 0.009455 ms MarkObjects: 0.174033 ms  DeleteObjects: 0.007922 ms)
+
+Spawned the local player.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 48cc -> priority: 1 
+  Thread -> id: 5a08 -> priority: 1 
