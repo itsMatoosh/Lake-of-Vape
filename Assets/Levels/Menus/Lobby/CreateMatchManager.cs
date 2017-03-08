@@ -19,4 +19,19 @@ public class CreateMatchManager : MonoBehaviour {
 	public void SetMaxPlayers(int maxPlayers) {
 		currentGameSettings.maxPlayerCount = maxPlayers;
 	}
+    /// <summary>
+    /// Sets the name of the game.
+    /// </summary>
+    /// <param name="name"></param>
+    public void SetGameName(string name)
+    {
+        currentGameSettings.gameName = name;
+    }
+    /// <summary>
+    /// Starts the game.
+    /// </summary>
+    public void StartGame()
+    {
+        MatchMaker.instance.CreateInternetMatch(currentGameSettings);
+    }
 }

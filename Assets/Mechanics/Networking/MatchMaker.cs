@@ -23,9 +23,9 @@ public class MatchMaker : MonoBehaviour
 	/// Creates a new match.
 	/// </summary>
 	/// <param name="matchName">Match name.</param>
-	public void CreateInternetMatch(string matchName)
+	public void CreateInternetMatch(GameSettings settings)
 	{
-		NetworkManager.singleton.matchMaker.CreateMatch(matchName, (uint)CreateMatchManager.currentGameSettings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
+        NetworkManager.singleton.matchMaker.CreateMatch(settings.gameName, (uint)settings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
 	}
 
 	/// <summary>
@@ -43,11 +43,11 @@ public class MatchMaker : MonoBehaviour
 			MatchInfo hostInfo = matchInfo;
 			NetworkServer.Listen(hostInfo, 42069);
 
-			NetworkManager.singleton.StartHost(hostInfo);
+            NetworkManager.singleton.StartHost(hostInfo);
 		}
 		else
 		{
-			Debug.LogError("Create match failed");
+			Debug.LogError("Create match failed! " + extendedInfo);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class MatchMaker : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("Couldn't connect to match maker");
+			Debug.LogError("Couldn't connect to match maker! " + extendedInfo);
 		}
 	}
 
@@ -105,7 +105,7 @@ public class MatchMaker : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("Join match failed");
+			Debug.LogError("Join match failed! " + extendedInfo);
 		}
 	}
 }

@@ -30,7 +30,8 @@ public class Game {
 	/// Inits the game.
 	/// </summary>
 	private void InitGame() {
-		//Loading the first level.
+        //Loading the first level.
+        playedLevels = new List<Level>();
 		LoadNextLevel();
 
 		//Starting a new round.

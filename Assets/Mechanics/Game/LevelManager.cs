@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,10 +10,13 @@ public class LevelManager : MonoBehaviour {
     {
         "nm_malasarka"
     };
-	/// <summary>
-	/// List of all the available tie breaker levels.
-	/// </summary>
-	public static string[] tieBreakerLevels;
+    /// <summary>
+    /// List of all the available tie breaker levels.
+    /// </summary>
+    public static string[] tieBreakerLevels =
+    {
+        "tb_tbd"
+    };
 
 	/// <summary>
 	/// Loads a random level.
@@ -24,8 +26,8 @@ public class LevelManager : MonoBehaviour {
 	public static Level LoadLevel(bool tieBreaker, List<string> blackList) {
 		string chosenLevel = "";
 
-		while (chosenLevel == "") {
-			if (normalLevels.Length == 0 || tieBreakerLevels.Length == 0) {
+        while (chosenLevel == "") {
+            if (normalLevels == null || normalLevels.Length == 0 || tieBreakerLevels == null || tieBreakerLevels.Length == 0) {
 				Debug.LogError ("Not enough levels to play the game! :(");
 				break;
 			}

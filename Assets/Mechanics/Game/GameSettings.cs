@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Settings of the game.
 /// </summary>
 public class GameSettings {
-	/// <summary>
+    /// <summary>
+    /// The name of the game.
+    /// </summary>
+    public string gameName;
+    /// <summary>
 	/// Number of players.
 	/// </summary>
 	public int maxPlayerCount;
@@ -15,10 +15,11 @@ public class GameSettings {
 	/// Initializes a new instance of the <see cref="GameSettings"/> class.
 	/// </summary>
 	/// <param name="playerCount">Player count.</param>
-	public GameSettings(int playerCount) {
+	public GameSettings(string name, int playerCount) {
 		this.maxPlayerCount = playerCount;
 	}
 	public GameSettings() {
+        this.gameName = "Unnamed Game";
 		this.maxPlayerCount = 10;
 	}
 }
