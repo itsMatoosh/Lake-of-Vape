@@ -11,7 +11,6 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        UserIdentity.Load();
         Debug.Log("Current username: " + UserIdentity.name);
         inputField.text = UserIdentity.name;
     }
@@ -29,6 +28,5 @@ public class MainMenuManager : MonoBehaviour
     public void SetUserName(string name)
     {
         UserIdentity.name = name;
-        UserIdentity.Save();
     } 
 }
