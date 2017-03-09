@@ -33,7 +33,7 @@ public class MatchMaker : MonoBehaviour
 	public void CreateInternetMatch(GameSettings settings)
 	{
 		if (Application.internetReachability == NetworkReachability.NotReachable) {
-			NetworkServer.Listen (42069);
+			NetworkServer.Listen (6969);
 			if (lanDiscovery.isClient || lanDiscovery.isServer) {
 				lanDiscovery.StopBroadcast ();
 			}
@@ -59,7 +59,7 @@ public class MatchMaker : MonoBehaviour
 			Debug.Log("Created match successfully! xd");
 
 			MatchInfo hostInfo = matchInfo;
-			NetworkServer.Listen(hostInfo, 42069);
+			NetworkServer.Listen(hostInfo, 6969);
 
 			if (lanDiscovery.isClient || lanDiscovery.isServer) {
 				lanDiscovery.StopBroadcast ();

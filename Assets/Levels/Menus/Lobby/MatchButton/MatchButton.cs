@@ -46,7 +46,7 @@ public class MatchButton : MonoBehaviour {
 		}
 		if (address != null) {
 			Debug.Log ("Connecting to a LAN match: " + address);
-			NetworkManager.singleton.networkPort = 42069;
+			NetworkManager.singleton.networkPort = 6969;
 			NetworkManager.singleton.networkAddress = address;
 			NetworkManager.singleton.StartClient ();
 		}
