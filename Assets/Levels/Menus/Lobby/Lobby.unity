@@ -225,7 +225,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -38.5
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
@@ -360,7 +360,7 @@ Prefab:
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -475.4
       objectReference: {fileID: 0}
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
@@ -593,8 +593,8 @@ MonoBehaviour:
   m_OfflineScene: Lobby
   m_OnlineScene: 
   m_SpawnPrefabs: []
-  m_CustomConfig: 0
-  m_MaxConnections: 4
+  m_CustomConfig: 1
+  m_MaxConnections: 10
   m_ConnectionConfig:
     m_PacketSize: 1500
     m_FragmentSize: 500
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
   matchName: default
-  matchSize: 4
+  matchSize: 10
   isNetworkActive: 0
   matchMaker: {fileID: 0}
 --- !u!114 &546599329
@@ -2475,7 +2475,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -256.95
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
