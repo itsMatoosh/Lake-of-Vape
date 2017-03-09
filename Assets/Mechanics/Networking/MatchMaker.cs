@@ -32,7 +32,18 @@ public class MatchMaker : MonoBehaviour
 	/// <param name="matchName">Match name.</param>
 	public void CreateInternetMatch(GameSettings settings)
 	{
-        NetworkManager.singleton.matchMaker.CreateMatch(settings.gameName, (uint)settings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
+		if (Application.internetReachability == NetworkReachability.NotReachable) {
+			NetworkServer.Listen (42069);
+			if (lanDiscovery.isClient || lanDiscovery.isServer) {
+				lanDiscovery.StopBroadcast ();
+			}
+
+			lanDiscovery.StartAsServer ();
+			NetworkManager.singleton.StartHost (new ConnectionConfig(), settings.maxPlayerCount);
+
+		} else {
+			NetworkManager.singleton.matchMaker.CreateMatch(settings.gameName, (uint)settings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
+		}   
 	}
 
     /// <summary>
