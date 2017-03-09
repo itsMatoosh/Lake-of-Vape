@@ -12,6 +12,7 @@ public class MatchButton : MonoBehaviour {
     /// </summary>
     public MatchInfoSnapshot matchInfo;
 	public string address;
+    public int port;
 	public string info;
 
 
@@ -33,7 +34,11 @@ public class MatchButton : MonoBehaviour {
 	public void Setup(string address, string info) {
 		this.address = address;
 		this.info = info;
-		matchName.text = info;
+
+        string[] matchInfo = info.Split('`');
+        matchName.text = matchInfo[0];
+        onlinePlayers.text = matchInfo[2];
+        port = int.Parse(matchInfo[1]);
 	}
     /// <summary>
     /// Connects to the server represented by the button.

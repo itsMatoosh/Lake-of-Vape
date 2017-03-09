@@ -4,6 +4,9 @@ using UnityEngine.Networking.Match;
 using System.Collections.Generic;
 using System;
 
+/// <summary>
+/// Matchmaker
+/// </summary>
 public class MatchMaker : MonoBehaviour
 {
 	/// <summary>
@@ -32,16 +35,18 @@ public class MatchMaker : MonoBehaviour
 	/// <param name="matchName">Match name.</param>
 	public void CreateInternetMatch(GameSettings settings)
 	{
-		if (Application.internetReachability == NetworkReachability.NotReachable) {
-			NetworkServer.Listen (6969);
+		if (true || Application.internetReachability == NetworkReachability.NotReachable) {
+			//NetworkServer.Listen (42069);
 			if (lanDiscovery.isClient || lanDiscovery.isServer) {
 				lanDiscovery.StopBroadcast ();
 			}
 
-			lanDiscovery.StartAsServer ();
 			NetworkManager.singleton.StartHost (new ConnectionConfig(), settings.maxPlayerCount);
+            //Setting the ip on landiscovery.
+            lanDiscovery.broadcastData = settings.gameName + "`" + NetworkServer.listenPort + "`" + "0/" + settings.maxPlayerCount;
+            lanDiscovery.StartAsServer();
 
-		} else {
+        } else {
 			NetworkManager.singleton.matchMaker.CreateMatch(settings.gameName, (uint)settings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
 		}   
 	}
@@ -59,14 +64,17 @@ public class MatchMaker : MonoBehaviour
 			Debug.Log("Created match successfully! xd");
 
 			MatchInfo hostInfo = matchInfo;
-			NetworkServer.Listen(hostInfo, 6969);
+			//NetworkServer.Listen(hostInfo, 42069);
 
 			if (lanDiscovery.isClient || lanDiscovery.isServer) {
 				lanDiscovery.StopBroadcast ();
 			}
 			lanDiscovery.StartAsServer ();
             NetworkManager.singleton.StartHost(hostInfo);
-		}
+            //Setting the ip on landiscovery.
+            lanDiscovery.broadcastData = NetworkServer.listenPort + "";
+            Debug.LogError(lanDiscovery.broadcastData);
+        }
 		else
 		{
 			Debug.LogError("Create match failed! " + extendedInfo);
