@@ -80,7 +80,11 @@ public class LobbyManager : MonoBehaviour {
 	/// <param name="address">Address.</param>
 	/// <param name="info">Info.</param>
 	public void AddLanMatchButton (string address, string info) {
-		((GameObject)Instantiate (matchButtonPrefab, matchButtonHolder)).GetComponent<MatchButton>().Setup(address, info);
+		foreach (Transform t in lanMatchButtonHolder) {
+			if (t.GetComponent<MatchButton> ().address == address)
+				return;
+		}
+		((GameObject)Instantiate (matchButtonPrefab, lanMatchButtonHolder)).GetComponent<MatchButton>().Setup(address, info);
 	}
 
     /// <summary>
