@@ -7,6 +7,6 @@ public class LANDiscovery : NetworkDiscovery
 {
 	public override void OnReceivedBroadcast (string fromAddress, string data)
 	{
-		base.OnReceivedBroadcast (fromAddress, data);
+		MatchMaker.instance.OnLANMatchDiscovered (fromAddress, data);
 	}
 }
