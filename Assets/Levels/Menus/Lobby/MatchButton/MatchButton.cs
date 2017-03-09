@@ -29,5 +29,6 @@ public class MatchButton : MonoBehaviour {
     public void Connect()
     {
         NetworkManager.singleton.matchMaker.JoinMatch(matchInfo.networkId, "", "", "", 0, 0, MatchMaker.instance.OnJoinInternetMatch);
+		GetComponent<Button> ().interactable = false;
     }
 }
