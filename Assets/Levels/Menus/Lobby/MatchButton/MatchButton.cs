@@ -11,6 +11,8 @@ public class MatchButton : MonoBehaviour {
     /// Info about the match represented by this button.
     /// </summary>
     public MatchInfoSnapshot matchInfo;
+	public string address;
+	public string info;
 
 
 	/// <summary>
@@ -23,12 +25,28 @@ public class MatchButton : MonoBehaviour {
         matchName.text = info.name;
 		onlinePlayers.text = info.currentSize + "/" + info.maxSize;
 	}
+	/// <summary>
+	/// Setup the specified address and info.
+	/// </summary>
+	/// <param name="address">Address.</param>
+	/// <param name="info">Info.</param>
+	public void Setup(string address, string info) {
+		this.address = address;
+		this.info = info;
+		matchName.text = info;
+	}
     /// <summary>
     /// Connects to the server represented by the button.
     /// </summary>
     public void Connect()
     {
-        NetworkManager.singleton.matchMaker.JoinMatch(matchInfo.networkId, "", "", "", 0, 0, MatchMaker.instance.OnJoinInternetMatch);
+		if (matchInfo != null) {
+			NetworkManager.singleton.matchMaker.JoinMatch(matchInfo.networkId, "", "", "", 0, 0, MatchMaker.instance.OnJoinInternetMatch);
+		}
+		if (address != null) {
+			NetworkManager.singleton.networkAddress = address;
+			NetworkManager.singleton.StartClient ();
+		}
 		GetComponent<Button> ().interactable = false;
     }
 }

@@ -12,6 +12,11 @@ public class MatchMaker : MonoBehaviour
 	public static MatchMaker instance;
 
 	/// <summary>
+	/// The lan discovery.
+	/// </summary>
+	public LANDiscovery lanDiscovery;
+
+	/// <summary>
 	/// Starts the MatchMaker.
 	/// </summary>
 	void Start()
@@ -44,6 +49,8 @@ public class MatchMaker : MonoBehaviour
 			MatchInfo hostInfo = matchInfo;
 			NetworkServer.Listen(hostInfo, 42069);
 
+			lanDiscovery.StopBroadcast ();
+			lanDiscovery.StartAsServer ();
             NetworkManager.singleton.StartHost(hostInfo);
 		}
 		else
@@ -58,7 +65,15 @@ public class MatchMaker : MonoBehaviour
 	/// <param name="matchName">Match name.</param>
 	public void FindInternetMatch(string matchName)
 	{
+		LobbyManager.instance.ClearMatchList();
 		NetworkManager.singleton.matchMaker.ListMatches(0, 10, matchName, true, 0, 0, OnInternetMatchList);
+	}
+	public void FindLanMatches() {
+		LobbyManager.instance.ClearLanMatchList ();
+
+		if (!lanDiscovery.isClient) {
+			lanDiscovery.StartAsClient ();
+		}
 	}
 
 	/// <summary>
@@ -73,7 +88,6 @@ public class MatchMaker : MonoBehaviour
 		{
 			if (matches.Count != 0)
 			{
-                LobbyManager.instance.ClearMatchList();
 				foreach(MatchInfoSnapshot match in matches)
                 {
                     LobbyManager.instance.AddMatchButton(match);
@@ -104,10 +118,19 @@ public class MatchMaker : MonoBehaviour
 
 			MatchInfo hostInfo = matchInfo;
 			NetworkManager.singleton.StartClient(hostInfo);
+			lanDiscovery.StopBroadcast ();
 		}
 		else
 		{
 			Debug.LogError("Join match failed! " + extendedInfo);
 		}
+	}
+	/// <summary>
+	/// Called when a lan match has been discovered.
+	/// </summary>
+	/// <param name="address">Address.</param>
+	/// <param name="info">Info.</param>
+	internal void OnLANMatchDiscovered(string address, string info) {
+		LobbyManager.instance.AddLanMatchButton(address, info);
 	}
 }
