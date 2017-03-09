@@ -41,9 +41,11 @@ public class MatchButton : MonoBehaviour {
     public void Connect()
     {
 		if (matchInfo != null) {
+			Debug.Log("Connecting to internet match: " + matchInfo.name);
 			NetworkManager.singleton.matchMaker.JoinMatch(matchInfo.networkId, "", "", "", 0, 0, MatchMaker.instance.OnJoinInternetMatch);
 		}
 		if (address != null) {
+			Debug.Log ("Connecting to a LAN match: " + address);
 			NetworkManager.singleton.networkAddress = address;
 			NetworkManager.singleton.StartClient ();
 		}
