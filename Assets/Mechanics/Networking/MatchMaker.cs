@@ -41,7 +41,7 @@ public class MatchMaker : MonoBehaviour
 				lanDiscovery.StopBroadcast ();
 			}
 
-			NetworkManager.singleton.StartHost (new ConnectionConfig(), settings.maxPlayerCount);
+			NetworkManager.singleton.StartHost (NetworkManager.singleton.connectionConfig, settings.maxPlayerCount);
             //Setting the ip on landiscovery.
             lanDiscovery.broadcastData = settings.gameName + "`" + NetworkServer.listenPort + "`" + "0/" + settings.maxPlayerCount;
             lanDiscovery.StartAsServer();
