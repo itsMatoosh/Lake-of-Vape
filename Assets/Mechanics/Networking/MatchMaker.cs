@@ -21,6 +21,7 @@ public class MatchMaker : MonoBehaviour
 	/// </summary>
 	void Start()
 	{
+		lanDiscovery.Initialize ();
 		instance = this;
 		NetworkManager.singleton.StartMatchMaker();
 	}
@@ -49,7 +50,9 @@ public class MatchMaker : MonoBehaviour
 			MatchInfo hostInfo = matchInfo;
 			NetworkServer.Listen(hostInfo, 42069);
 
-			lanDiscovery.StopBroadcast ();
+			if (lanDiscovery.isClient || lanDiscovery.isServer) {
+				lanDiscovery.StopBroadcast ();
+			}
 			lanDiscovery.StartAsServer ();
             NetworkManager.singleton.StartHost(hostInfo);
 		}
