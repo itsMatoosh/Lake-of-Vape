@@ -220,7 +220,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 64.58118
+      value: 32.138985
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
@@ -230,7 +230,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 129.16235
+      value: 64.27797
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
@@ -355,7 +355,7 @@ Prefab:
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 64.58118
+      value: 32.138985
       objectReference: {fileID: 0}
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
@@ -365,7 +365,7 @@ Prefab:
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 129.16235
+      value: 64.27797
       objectReference: {fileID: 0}
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89bbfad3b0e4930a0bb646b7beb9be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NetworkPort: 42069
+  m_NetworkPort: 7777
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
   m_NetworkAddress: localhost
@@ -593,8 +593,8 @@ MonoBehaviour:
   m_OfflineScene: Lobby
   m_OnlineScene: 
   m_SpawnPrefabs: []
-  m_CustomConfig: 1
-  m_MaxConnections: 10
+  m_CustomConfig: 0
+  m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1500
     m_FragmentSize: 500
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
   matchName: default
-  matchSize: 10
+  matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
 --- !u!114 &546599329
@@ -2470,7 +2470,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 64.58118
+      value: 32.138985
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
@@ -2480,7 +2480,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 129.16235
+      value: 64.27797
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}

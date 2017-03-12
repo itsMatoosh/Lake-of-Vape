@@ -80,7 +80,8 @@ public class LobbyManager : MonoBehaviour {
 	/// <param name="address">Address.</param>
 	/// <param name="info">Info.</param>
 	public void AddLanMatchButton (string address, string info) {
-		foreach (Transform t in lanMatchButtonHolder) {
+        if (lanMatchButtonHolder == null) return;
+        foreach (Transform t in lanMatchButtonHolder) {
 			if (t.GetComponent<MatchButton> ().address == address)
 				return;
 		}

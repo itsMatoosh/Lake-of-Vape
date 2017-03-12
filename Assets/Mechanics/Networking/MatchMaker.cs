@@ -2,7 +2,6 @@
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using System.Collections.Generic;
-using System;
 
 /// <summary>
 /// Matchmaker
@@ -41,10 +40,15 @@ public class MatchMaker : MonoBehaviour
 				lanDiscovery.StopBroadcast ();
 			}
 
-			NetworkManager.singleton.StartHost (NetworkManager.singleton.connectionConfig, settings.maxPlayerCount);
+            NetworkManager.singleton.StartHost();
             //Setting the ip on landiscovery.
             lanDiscovery.broadcastData = settings.gameName + "`" + NetworkServer.listenPort + "`" + "0/" + settings.maxPlayerCount;
             lanDiscovery.StartAsServer();
+            Debug.Log("Server connection config: ");
+            foreach (QosType channel in NetworkManager.singleton.channels)
+            {
+                Debug.Log(channel);
+            }
 
         } else {
 			NetworkManager.singleton.matchMaker.CreateMatch(settings.gameName, (uint)settings.maxPlayerCount, true, "", "", "", 0, 0, OnInternetMatchCreate);
@@ -155,4 +159,26 @@ public class MatchMaker : MonoBehaviour
 	internal void OnLANMatchDiscovered(string address, string info) {
 		LobbyManager.instance.AddLanMatchButton(address, info);
 	}
+    /// <summary>
+    /// Joins a lan match.
+    /// </summary>
+    /// <param name="address"></param>
+    /// <param name="port"></param>
+    internal void JoinLanMatch(string address, int port) {
+        Debug.Log("Connecting to a LAN match: " + address + ":" + port);
+        NetworkManager.singleton.networkPort = port;
+        NetworkManager.singleton.networkAddress = address;
+
+        NetworkManager.singleton.StartClient();
+        lanDiscovery.StopBroadcast();
+    }
+    /// <summary>
+    /// Joins an Intenet match.
+    /// </summary>
+    /// <param name="matchInfo"></param>
+    internal void JoinInternetMatch(MatchInfoSnapshot matchInfo)
+    {
+        Debug.Log("Connecting to an Internet match: " + matchInfo.name);
+        NetworkManager.singleton.matchMaker.JoinMatch(matchInfo.networkId, "", "", "", 0, 0, instance.OnJoinInternetMatch);
+    }
 }
