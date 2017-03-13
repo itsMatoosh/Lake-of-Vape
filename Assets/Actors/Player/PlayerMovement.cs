@@ -53,8 +53,18 @@ public class PlayerMovement : NetworkBehaviour {
     }
     /// <summary>
     /// Cache of the input before fixed update.
+	/// Client side
     /// </summary>
-    public PlayerInput inputCache = new PlayerInput();
+    public PlayerInput clientInputCache = new PlayerInput();
+	/// <summary>
+	/// The last client input.
+	/// </summary>
+	public PlayerInput lastClientInput = new PlayerInput ();
+	/// <summary>
+	/// Cache of the input before simulation.
+	/// Server side.
+	/// </summary>
+	public PlayerInput serverInputCache = new PlayerInput();
     /// <summary>
     /// Cache of the server result.
     /// </summary>
@@ -79,15 +89,15 @@ public class PlayerMovement : NetworkBehaviour {
             }
 
             //Simulating on...
-            body.velocity = new Vector2(inputCache.inputXCache * speed,
-                                                    inputCache.inputYCache * speed);
+			body.velocity = new Vector2(serverInputCache.inputXCache * speed,
+				serverInputCache.inputYCache * speed);
 
             //Resetting the input and waiting for input from player.
             resultCache = new Result
             {
-                timeStamp = inputCache.timeStamp
+				timeStamp = serverInputCache.timeStamp
             };
-            inputCache = new PlayerInput();
+			serverInputCache = new PlayerInput();
         }
         if (isLocalPlayer)
         {
@@ -96,7 +106,7 @@ public class PlayerMovement : NetworkBehaviour {
             {
                 posX = transform.position.x,
                 posY = transform.position.y,
-                timeStamp = inputCache.timeStamp
+				timeStamp = lastClientInput.timeStamp
             });
             if(clientResults.Count > 15)
             {
@@ -104,10 +114,13 @@ public class PlayerMovement : NetworkBehaviour {
             }
 
             //Sending input update.
-            inputCache.timeStamp = Time.timeSinceLevelLoad;
-            CmdSendInput(inputCache);
-            //Resetting the input cache.
-            inputCache = new PlayerInput();
+			clientInputCache.timeStamp = Time.timeSinceLevelLoad;
+			CmdSendInput(clientInputCache);
+
+			//Resetting the input.
+			lastClientInput.timeStamp = clientInputCache.timeStamp;
+
+			clientInputCache = new PlayerInput();
 
             //Simulating locally.
             //TODO: Simulate locally.
@@ -122,12 +135,12 @@ public class PlayerMovement : NetworkBehaviour {
         if (!isLocalPlayer) return;
         if(Input.GetAxis("Horizontal") != 0)
         {
-            inputCache.inputXCache = Input.GetAxis("Horizontal");
+			clientInputCache.inputXCache = Input.GetAxis("Horizontal");
         }
 
         if(Input.GetAxis("Vertical") != 0)
         {
-            inputCache.inputYCache = Input.GetAxis("Vertical");
+			clientInputCache.inputYCache = Input.GetAxis("Vertical");
         }
     }
 
@@ -139,7 +152,7 @@ public class PlayerMovement : NetworkBehaviour {
     public void CmdSendInput(PlayerInput input)
     {
         //Called on the server.
-        inputCache = input;
+		serverInputCache = input;
     }
     /// <summary>
     /// Called when the server sends the simulation results.
@@ -150,13 +163,13 @@ public class PlayerMovement : NetworkBehaviour {
     {
         //Checking if the results match between client and the server.
         Result matchingClientResult = null;
-        foreach (Result clientResult in clientResults)
-        {
-            if(clientResult.timeStamp == result.timeStamp)
-            {
-                matchingClientResult = clientResult;
-            }
-        }
+		for (int i = 0; i < clientResults.Count; i++) {
+			if(clientResults[i].timeStamp == result.timeStamp)
+			{
+				matchingClientResult = clientResults[i+1];
+			}
+		}
+	
         if(matchingClientResult == null)
         {
             Debug.LogError("No matching client simulation samples!");
