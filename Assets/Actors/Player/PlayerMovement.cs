@@ -74,7 +74,14 @@ public class PlayerMovement : NetworkBehaviour {
     /// </summary>
     public List<Result> clientResults = new List<Result>();
 
-    /// <summary>
+	public override void OnStartClient ()
+	{
+		if (!isLocalPlayer) {
+			body.isKinematic = false;
+		}
+	}
+
+	/// <summary>
     /// Calculating the movement.
     /// </summary>
     private void FixedUpdate()
@@ -162,30 +169,49 @@ public class PlayerMovement : NetworkBehaviour {
     public void RpcOnResultsReceived(Result result)
     {
 		if (!isLocalPlayer) {
+<<<<<<< HEAD
 			GetComponent<Transform>().position.Set (result.posX, result.posY, 1);
+=======
+			if (isServer) {
+				return;
+			}
+			body.MovePosition (new Vector2(result.posX, result.posY));
+>>>>>>> origin/master
 			return;
 		}
 
-        //Checking if the results match between client and the server.
-        Result matchingClientResult = null;
-		for (int i = 0; i < clientResults.Count; i++) {
-			if(clientResults[i].timeStamp == result.timeStamp)
-			{
-				matchingClientResult = clientResults[i+1];
+		if (!isServer) {
+			//Checking if the results match between client and the server.
+			Result matchingClientResult = null;
+			for (int i = 0; i < clientResults.Count; i++) {
+				if(clientResults[i].timeStamp == result.timeStamp)
+				{
+					matchingClientResult = clientResults[i-1];
+				}
 			}
-		}
-	
-        if(matchingClientResult == null)
-        {
-			Debug.LogError("No matching client simulation samples! ");
-            return;
-        }
 
+			if(matchingClientResult == null)
+			{
+				Debug.LogError("No matching client simulation samples! ");
+				return;
+			}
+
+<<<<<<< HEAD
         if(result.posX != matchingClientResult.posX || result.posY != matchingClientResult.posY)
         {
             Debug.LogError("SERVER-CLIENT MISMATCH!!!");
             Debug.Log("Server: " + result.posX + "/ " + result.timeStamp + " Client: " + matchingClientResult.posX + "/" + matchingClientResult.timeStamp);
 			GetComponent<Transform>().position.Set (result.posX, result.posY, 1);
         }
+=======
+			if(result.posX != matchingClientResult.posX || result.posY != matchingClientResult.posY)
+			{
+				Debug.LogError("SERVER-CLIENT MISMATCH!!!");
+				Debug.Log("Server: " + result.posX + "/ " + result.timeStamp + " Client: " + matchingClientResult.posX + "/" + matchingClientResult.timeStamp);
+				transform.position.Set (result.posX, result.posY, 1);
+				body.MovePosition (new Vector2(result.posX, result.posY));
+			}
+		}
+>>>>>>> origin/master
     }
 }
