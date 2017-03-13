@@ -116,14 +116,14 @@ public class PlayerMovement : NetworkBehaviour {
             //Sending input update.
 			clientInputCache.timeStamp = Time.timeSinceLevelLoad;
 			CmdSendInput(clientInputCache);
-
-			//Resetting the input.
 			lastClientInput.timeStamp = clientInputCache.timeStamp;
 
-			clientInputCache = new PlayerInput();
-
             //Simulating locally.
-            //TODO: Simulate locally.
+			body.velocity = new Vector2(clientInputCache.inputXCache * speed,
+				clientInputCache.inputYCache * speed);
+
+			//Resetting the input.
+			clientInputCache = new PlayerInput();
         }
     }
 
@@ -161,8 +161,10 @@ public class PlayerMovement : NetworkBehaviour {
     [ClientRpc]
     public void RpcOnResultsReceived(Result result)
     {
-		if (!isLocalPlayer)
-			return;
+		if (!isLocalPlayer && !isServer) {
+			transform.position.Set (result.posX, result.posY, 0);
+		}
+
         //Checking if the results match between client and the server.
         Result matchingClientResult = null;
 		for (int i = 0; i < clientResults.Count; i++) {
