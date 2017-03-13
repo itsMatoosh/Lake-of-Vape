@@ -161,8 +161,8 @@ public class PlayerMovement : NetworkBehaviour {
     [ClientRpc]
     public void RpcOnResultsReceived(Result result)
     {
-		if (!isLocalPlayer && !isServer) {
-			transform.position.Set (result.posX, result.posY, 0);
+		if (!isLocalPlayer) {
+			transform.position.Set (result.posX, result.posY, 1);
 			return;
 		}
 
@@ -177,7 +177,7 @@ public class PlayerMovement : NetworkBehaviour {
 	
         if(matchingClientResult == null)
         {
-            Debug.LogError("No matching client simulation samples!");
+			Debug.LogError("No matching client simulation samples! ");
             return;
         }
 
@@ -185,7 +185,7 @@ public class PlayerMovement : NetworkBehaviour {
         {
             Debug.LogError("SERVER-CLIENT MISMATCH!!!");
             Debug.Log("Server: " + result.posX + "/ " + result.timeStamp + " Client: " + matchingClientResult.posX + "/" + matchingClientResult.timeStamp);
-
+			transform.position.Set (result.posX, result.posY, 1);
         }
     }
 }
