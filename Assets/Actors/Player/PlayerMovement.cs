@@ -161,6 +161,8 @@ public class PlayerMovement : NetworkBehaviour {
     [ClientRpc]
     public void RpcOnResultsReceived(Result result)
     {
+		if (!isLocalPlayer)
+			return;
         //Checking if the results match between client and the server.
         Result matchingClientResult = null;
 		for (int i = 0; i < clientResults.Count; i++) {
