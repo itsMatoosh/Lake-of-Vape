@@ -97,7 +97,7 @@ public class PlayerMovement : NetworkBehaviour {
             {
 				timeStamp = serverInputCache.timeStamp
             };
-			serverInputCache = new PlayerInput();
+			//serverInputCache = new PlayerInput();
         }
         if (isLocalPlayer)
         {
@@ -163,6 +163,7 @@ public class PlayerMovement : NetworkBehaviour {
     {
 		if (!isLocalPlayer && !isServer) {
 			transform.position.Set (result.posX, result.posY, 0);
+			return;
 		}
 
         //Checking if the results match between client and the server.
