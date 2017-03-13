@@ -162,7 +162,7 @@ public class PlayerMovement : NetworkBehaviour {
     public void RpcOnResultsReceived(Result result)
     {
 		if (!isLocalPlayer) {
-			GetComponent<Transform>().position.Set (result.posX, result.posY, 1);
+			transform.position.Set (result.posX, result.posY, 1);
 			return;
 		}
 
@@ -185,7 +185,7 @@ public class PlayerMovement : NetworkBehaviour {
         {
             Debug.LogError("SERVER-CLIENT MISMATCH!!!");
             Debug.Log("Server: " + result.posX + "/ " + result.timeStamp + " Client: " + matchingClientResult.posX + "/" + matchingClientResult.timeStamp);
-			GetComponent<Transform>().position.Set (result.posX, result.posY, 1);
+			transform.position.Set (result.posX, result.posY, 1);
         }
     }
 }
