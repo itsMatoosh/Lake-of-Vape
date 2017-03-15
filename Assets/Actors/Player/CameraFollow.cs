@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour {
 	//Camera follow script.
 	public float smoothTime = 0.15f;
 	private Vector3 velocity = Vector3.zero;
-	private Camera thisCamera;
+	public static Camera thisCamera;
     public Transform target;
 
 	// Update is called once per frame

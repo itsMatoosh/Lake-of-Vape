@@ -27,6 +27,10 @@ public class PlayerMovement : NetworkBehaviour {
 		/// Cache of Y input.
 		/// </summary>
 		public float inputYCache;
+		/// <summary>
+		/// Player's rotation.
+		/// </summary>
+		public float rotation;
 
 		/// <summary>
 		/// Timestamp of the input.
@@ -45,6 +49,10 @@ public class PlayerMovement : NetworkBehaviour {
 		/// Server side player y position.
 		/// </summary>
 		public float posY;
+		/// <summary>
+		/// Server side rotation of the player.
+		/// </summary>
+		public float rotation;
 
 		/// <summary>
 		/// Timestamp of the results.
@@ -98,11 +106,13 @@ public class PlayerMovement : NetworkBehaviour {
 			//Simulating on...
 			body.velocity = new Vector2(serverInputCache.inputXCache * speed,
 				serverInputCache.inputYCache * speed);
+			transform.rotation = Quaternion.AngleAxis(serverInputCache.rotation, Vector3.forward); 
 
 			//Resetting the input and waiting for input from player.
 			resultCache = new Result
 			{
-				timeStamp = serverInputCache.timeStamp
+				timeStamp = serverInputCache.timeStamp,
+				rotation = serverInputCache.rotation
 			};
 			//serverInputCache = new PlayerInput();
 		}
@@ -113,6 +123,7 @@ public class PlayerMovement : NetworkBehaviour {
 				{
 					posX = transform.position.x,
 					posY = transform.position.y,
+					rotation = lastClientInput.rotation,
 					timeStamp = lastClientInput.timeStamp
 				});
 			if(clientResults.Count > 15)
@@ -124,6 +135,7 @@ public class PlayerMovement : NetworkBehaviour {
 			clientInputCache.timeStamp = Time.timeSinceLevelLoad;
 			CmdSendInput(clientInputCache);
 			lastClientInput.timeStamp = clientInputCache.timeStamp;
+			lastClientInput.rotation = clientInputCache.rotation;
 
 			//Simulating locally.
 			body.velocity = new Vector2(clientInputCache.inputXCache * speed,
@@ -149,6 +161,16 @@ public class PlayerMovement : NetworkBehaviour {
 		{
 			clientInputCache.inputYCache = Input.GetAxis("Vertical");
 		}
+		AimAtCamera ();
+	}
+	/// <summary>
+	/// Aims at the camera.
+	/// </summary>
+	private void AimAtCamera() {
+		var pos = CameraFollow.thisCamera.WorldToScreenPoint(transform.position);
+		var dir = Input.mousePosition - pos;
+		clientInputCache.rotation = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.AngleAxis(clientInputCache.rotation, Vector3.forward); 
 	}
 
 	/// <summary>
@@ -173,6 +195,7 @@ public class PlayerMovement : NetworkBehaviour {
 				return;
 			}
 			body.MovePosition (new Vector2(result.posX, result.posY));
+			body.MoveRotation(result.rotation); 
 			return;
 		}
 
