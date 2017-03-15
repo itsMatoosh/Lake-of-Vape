@@ -16,6 +16,8 @@ public class Vaper : NetworkBehaviour {
 	public ParticleSystem iJustS;
 
 	void Update() {
+		if (!isLocalPlayer)
+			return;
 		if (Input.GetButton ("Vape") && !vaping) {
 			CmdVape (true);
 		} else if(vaping) {
