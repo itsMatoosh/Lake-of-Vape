@@ -152,15 +152,9 @@ public class PlayerMovement : NetworkBehaviour {
 	private void Update()
 	{
 		if (!isLocalPlayer) return;
-		if(Input.GetAxis("Horizontal") != 0)
-		{
-			clientInputCache.inputXCache = Input.GetAxis("Horizontal");
-		}
+		clientInputCache.inputXCache = Input.GetAxis("Horizontal");
+		clientInputCache.inputYCache = Input.GetAxis("Vertical");
 
-		if(Input.GetAxis("Vertical") != 0)
-		{
-			clientInputCache.inputYCache = Input.GetAxis("Vertical");
-		}
 		AimAtCamera ();
 	}
 	/// <summary>
