@@ -89,7 +89,7 @@ public class PlayerMovement : NetworkBehaviour {
 
 	public override void OnStartClient ()
 	{
-		if (!isLocalPlayer) {
+		if (!isLocalPlayer && !isServer) {
 			body.isKinematic = false;
 		}
 	}

@@ -57,9 +57,9 @@ GameObject:
   - component: {fileID: 114944019279683972}
   - component: {fileID: 114455977932065524}
   - component: {fileID: 114360167616511448}
-  - component: {fileID: 114453046558488254}
   - component: {fileID: 114624235356756172}
   - component: {fileID: 114464788506606968}
+  - component: {fileID: 114823312310874368}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -188,20 +188,6 @@ MonoBehaviour:
   deathEffect: {fileID: 1379295981808992, guid: 79e6bfe7db7db41eaaf9d37234cd3fc0,
     type: 2}
   username: 
---- !u!114 &114453046558488254
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1871467917240156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277d6807f2dff384c8254ce51e964916, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 50212597159662112}
-  speed: 5
-  canMove: 1
 --- !u!114 &114455977932065524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,6 +233,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 50212597159662112}
+--- !u!114 &114823312310874368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871467917240156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c555f2eac8de14345a9de5a9c5aada36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 50212597159662112}
+  speed: 6
+  canMove: 1
 --- !u!114 &114944019279683972
 MonoBehaviour:
   m_ObjectHideFlags: 1
