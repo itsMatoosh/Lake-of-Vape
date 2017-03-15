@@ -88,6 +88,10 @@ public class PlayerMovement : NetworkBehaviour {
 	/// Result cache of the client.
 	/// </summary>
 	public List<Result> clientResults = new List<Result>();
+    /// <summary>
+    /// Result cache of the server.
+    /// </summary>
+    public List<Result> serverResults = new List<Result>();
 
 	public override void OnStartClient ()
 	{
@@ -105,7 +109,12 @@ public class PlayerMovement : NetworkBehaviour {
 			//Sending predictions for the last fixedupodate simulations.
 			resultCache.posX = transform.position.x;
 			resultCache.posY = transform.position.y;
-            currentResult = resultCache;
+            serverResults.Add(resultCache);
+            if(serverResults.Count >= 2)
+            {
+                currentResult = serverResults[0];
+                serverResults.RemoveAt(0);
+            }
 
 
 			//Simulating on...
@@ -207,13 +216,13 @@ public class PlayerMovement : NetworkBehaviour {
             //Checking if the results match between client and the server.
             Result matchingClientResult = new Result();
 			for (int i = 0; i < clientResults.Count; i++) {
-                Debug.Log("Client result # " + i);
-                Debug.Log(" x: " + clientResults[i].posX);
-                Debug.Log(" time: " + clientResults[i].timeStamp);
-				if(clientResults[i].posX == result.posX)
+               // Debug.Log("Client result # " + i);
+                //Debug.Log(" x: " + clientResults[i].posX);
+                //Debug.Log(" time: " + clientResults[i].timeStamp);
+				if(clientResults[i].timeStamp == result.timeStamp)
 				{
                     Debug.Log("[CHOSEN]");
-					matchingClientResult = clientResults[i - 3];
+					matchingClientResult = clientResults[i+4];
 				}
 			}
 
