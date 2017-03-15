@@ -214,11 +214,11 @@ public class PlayerMovement : NetworkBehaviour {
 				}
 			}
 
-			/*if(matchingClientResult == null)
+			if(matchingClientResult.timeStamp == 0)
 			{
 				Debug.LogError("No matching client simulation samples! ");
 				return;
-			}*/
+			}
 
 			if(result.posX != matchingClientResult.posX || result.posY != matchingClientResult.posY)
 			{
