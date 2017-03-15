@@ -88,10 +88,6 @@ public class PlayerMovement : NetworkBehaviour {
 	/// Result cache of the client.
 	/// </summary>
 	public List<Result> clientResults = new List<Result>();
-    /// <summary>
-    /// Result cache of the server.
-    /// </summary>
-    public List<Result> serverResults = new List<Result>();
 
 	public override void OnStartClient ()
 	{
@@ -109,12 +105,7 @@ public class PlayerMovement : NetworkBehaviour {
 			//Sending predictions for the last fixedupodate simulations.
 			resultCache.posX = transform.position.x;
 			resultCache.posY = transform.position.y;
-            serverResults.Add(resultCache);
-            if(serverResults.Count >= 2)
-            {
-                currentResult = serverResults[0];
-                serverResults.RemoveAt(0);
-            }
+            currentResult = resultCache;
 
 
 			//Simulating on...
@@ -222,7 +213,7 @@ public class PlayerMovement : NetworkBehaviour {
 				if(clientResults[i].timeStamp == result.timeStamp)
 				{
                     Debug.Log("[CHOSEN]");
-					matchingClientResult = clientResults[i+4];
+					matchingClientResult = clientResults[i];
 				}
 			}
 
