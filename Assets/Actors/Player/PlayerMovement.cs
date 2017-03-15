@@ -79,6 +79,10 @@ public class PlayerMovement : NetworkBehaviour {
 	/// </summary>
 	public Result resultCache = null;
 	/// <summary>
+	/// Whether the player can move.
+	/// </summary>
+	public bool canMove = true;
+	/// <summary>
 	/// Result cache of the client.
 	/// </summary>
 	public List<Result> clientResults = new List<Result>();
@@ -105,9 +109,11 @@ public class PlayerMovement : NetworkBehaviour {
 			}
 
 			//Simulating on...
-			body.velocity = new Vector2(serverInputCache.inputXCache * speed,
-				serverInputCache.inputYCache * speed);
-			transform.rotation = Quaternion.AngleAxis(serverInputCache.rotation, Vector3.forward); 
+			if (canMove) {
+				body.velocity = new Vector2 (serverInputCache.inputXCache * speed,
+					serverInputCache.inputYCache * speed);
+				transform.rotation = Quaternion.AngleAxis (serverInputCache.rotation, Vector3.forward); 
+			}
 
 			//Resetting the input and waiting for input from player.
 			resultCache = new Result
@@ -139,8 +145,10 @@ public class PlayerMovement : NetworkBehaviour {
 			lastClientInput.rotation = clientInputCache.rotation;
 
 			//Simulating locally.
-			body.velocity = new Vector2(clientInputCache.inputXCache * speed,
-				clientInputCache.inputYCache * speed);
+			if (canMove) {
+				body.velocity = new Vector2(clientInputCache.inputXCache * speed,
+					clientInputCache.inputYCache * speed);
+			}
 
 			//Resetting the input.
 			clientInputCache = new PlayerInput();
@@ -162,6 +170,8 @@ public class PlayerMovement : NetworkBehaviour {
 	/// Aims at the camera.
 	/// </summary>
 	private void AimAtCamera() {
+		if (!canMove)
+			return;
 		var pos = CameraFollow.thisCamera.WorldToScreenPoint(transform.position);
 		var dir = Input.mousePosition - pos;
 		clientInputCache.rotation = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

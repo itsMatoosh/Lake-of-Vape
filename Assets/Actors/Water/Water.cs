@@ -88,4 +88,11 @@ public class Water : NetworkBehaviour {
 		coolDown = 10f;
 		spreadable = false;
 	}
+	void OnTriggerEnter2D(Collider2D coll) {
+		if (isServer) {
+			if (coll.gameObject.tag == "Player") {
+				coll.gameObject.GetComponent<Player> ().Kill ();
+			}
+		}
+	}
 }

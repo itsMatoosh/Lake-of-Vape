@@ -19,6 +19,7 @@ public class Player : NetworkBehaviour {
     /// </summary>
     [Tooltip("Prefab of the following camera.")]
     public Object cameraFollowPrefab;
+	public Object deathEffect;
 
     /// <summary>
     /// Name of the owner of this player.
@@ -74,4 +75,22 @@ public class Player : NetworkBehaviour {
     {
         ((GameObject)Instantiate(cameraFollowPrefab, new Vector3(0,0,-1), Quaternion.identity)).GetComponent<CameraFollow>().target = this.transform;
     }
+	[Server]
+	public void Kill() {
+		NetworkServer.Spawn((GameObject)Instantiate (deathEffect, transform.position, Quaternion.identity));
+		GetComponent<PlayerMovement> ().canMove = false;
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
+		StartCoroutine (Respawn());
+	}
+	[Server]
+		public IEnumerator Respawn() {
+		yield return new WaitForSeconds(5f);
+
+		var spawn=NetworkManager.singleton.GetStartPosition();
+		var newPlayer = ( GameObject) Instantiate(NetworkManager.singleton.playerPrefab, spawn.position, spawn.rotation );
+		NetworkServer.Destroy( this.gameObject );
+		Destroy (this.gameObject);
+		NetworkServer.ReplacePlayerForConnection( this.connectionToClient, newPlayer, this.playerControllerId );
+		CameraFollow.instance.target = newPlayer.transform;
+	}
 }

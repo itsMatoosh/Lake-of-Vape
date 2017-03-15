@@ -225,7 +225,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -38.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
@@ -360,7 +360,7 @@ Prefab:
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -274.80002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224685002217831446, guid: 8f2315cf3f96b499dbed106a00d603f5,
         type: 2}
@@ -594,6 +594,7 @@ MonoBehaviour:
   m_OnlineScene: 
   m_SpawnPrefabs:
   - {fileID: 1161992106950728, guid: ad1e26e6851c24d22a060e5a984b525f, type: 2}
+  - {fileID: 1379295981808992, guid: 79e6bfe7db7db41eaaf9d37234cd3fc0, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -2476,7 +2477,7 @@ Prefab:
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -156.65001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224270132146511564, guid: 3f3b4da4c8e124a56ba84504a97175b7,
         type: 2}

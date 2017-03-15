@@ -13,6 +13,7 @@ public class CameraFollow : MonoBehaviour {
 	private Vector3 velocity = Vector3.zero;
 	public static Camera thisCamera;
     public Transform target;
+	public static CameraFollow instance;
 
 	// Update is called once per frame
 	void Update () 
@@ -23,6 +24,7 @@ public class CameraFollow : MonoBehaviour {
         transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, smoothTime);
     }
 	void Awake() {
+		instance = this;
 		thisCamera = GetComponent<Camera> ();
 	}
 }

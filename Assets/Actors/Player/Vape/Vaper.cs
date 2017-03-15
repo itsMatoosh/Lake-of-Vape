@@ -14,14 +14,23 @@ public class Vaper : NetworkBehaviour {
 	/// The vape effect.
 	/// </summary>
 	public ParticleSystem iJustS;
+	private float coolDown = 0.25f;
 
 	void Update() {
 		if (!isLocalPlayer)
 			return;
+		coolDown -= Time.deltaTime;
+
 		if (Input.GetButton ("Vape") && !vaping) {
-			CmdVape (true);
-		} else if(vaping) {
-			CmdVape (false);
+			if (coolDown <= 0) {
+				CmdVape (true);
+				coolDown = 0.25f;
+			}
+		} else {
+			if (coolDown <= 0) {
+				CmdVape (false);
+				coolDown = 0.25f;
+			}
 		}
 	}
 
