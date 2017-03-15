@@ -73,16 +73,23 @@ public class Player : NetworkBehaviour {
     /// </summary>
     private void SpawnCamera()
     {
-        ((GameObject)Instantiate(cameraFollowPrefab, new Vector3(0,0,-1), Quaternion.identity)).GetComponent<CameraFollow>().target = this.transform;
+		if (CameraFollow.instance == null) {
+			((GameObject)Instantiate(cameraFollowPrefab, new Vector3(0,0,-1), Quaternion.identity)).GetComponent<CameraFollow>().target = this.transform;
+		}
+		CameraFollow.instance.target = this.transform;
     }
 	[Server]
 	public void Kill() {
-		NetworkServer.Spawn((GameObject)Instantiate (deathEffect, transform.position, Quaternion.identity));
-		GetComponent<PlayerMovement> ().canMove = false;
-		GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
-		Destroy (CameraFollow.instance.gameObject);
-		StartCoroutine (Respawn());
+		if (isServer) {
+			NetworkServer.Spawn((GameObject)Instantiate (deathEffect, transform.position, Quaternion.identity));
+			GetComponent<PlayerMovement> ().canMove = false;
+			GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
+			RpcOnDeath ();
+
+			StartCoroutine (Respawn());
+		}
 	}
+
 	[Server]
 		public IEnumerator Respawn() {
 		yield return new WaitForSeconds(5f);
@@ -92,6 +99,12 @@ public class Player : NetworkBehaviour {
 		NetworkServer.Destroy( this.gameObject );
 		Destroy (this.gameObject);
 		NetworkServer.ReplacePlayerForConnection( this.connectionToClient, newPlayer, this.playerControllerId );
-		CameraFollow.instance.target = newPlayer.transform;
+	}
+	[ClientRpc]
+	public void RpcOnDeath() {
+		if (isLocalPlayer) {
+			GetComponent<PlayerMovement> ().canMove = false;
+			GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
+		}
 	}
 }
