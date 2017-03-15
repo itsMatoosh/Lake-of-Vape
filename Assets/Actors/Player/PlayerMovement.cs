@@ -209,7 +209,7 @@ public class PlayerMovement : NetworkBehaviour {
 			for (int i = 0; i < clientResults.Count; i++) {
 				if(clientResults[i].timeStamp == result.timeStamp)
 				{
-					matchingClientResult = clientResults[i];
+					matchingClientResult = clientResults[i - 3];
 				}
 			}
 
