@@ -36,7 +36,7 @@ public class PlayerMovement : NetworkBehaviour {
 		/// <summary>
 		/// Timestamp of the input.
 		/// </summary>
-		public double timeStamp;
+		public float timeStamp;
 	}
 	/// <summary>
 	/// Used to verify the position predicted by client.
@@ -58,7 +58,7 @@ public class PlayerMovement : NetworkBehaviour {
 		/// <summary>
 		/// Timestamp of the results.
 		/// </summary>
-		public double timeStamp;
+		public float timeStamp;
 	}
 	/// <summary>
 	/// Cache of the input before fixed update.
@@ -139,7 +139,7 @@ public class PlayerMovement : NetworkBehaviour {
 			}
 
 			//Sending input update.
-			clientInputCache.timeStamp = Time.timeSinceLevelLoad;
+			clientInputCache.timeStamp = Time.time;
 			CmdSendInput(clientInputCache);
 			lastClientInput.timeStamp = clientInputCache.timeStamp;
 			lastClientInput.rotation = clientInputCache.rotation;
@@ -207,12 +207,8 @@ public class PlayerMovement : NetworkBehaviour {
             //Checking if the results match between client and the server.
             Result matchingClientResult = new Result();
 			for (int i = 0; i < clientResults.Count; i++) {
-               // Debug.Log("Client result # " + i);
-                //Debug.Log(" x: " + clientResults[i].posX);
-                //Debug.Log(" time: " + clientResults[i].timeStamp);
 				if(clientResults[i].timeStamp == result.timeStamp)
 				{
-                    Debug.Log("[CHOSEN]");
 					matchingClientResult = clientResults[i];
 				}
 			}
