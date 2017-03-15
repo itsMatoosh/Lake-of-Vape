@@ -258,7 +258,7 @@ public class PlayerMovement : NetworkBehaviour {
 				Debug.LogError("SERVER-CLIENT MISMATCH!!!");
 				Debug.Log("Server: " + result.posX + "/ " + result.timeStamp + " Client: " + matchingClientResult.posX + "/" + matchingClientResult.timeStamp);
 				//transform.position.Set (result.posX, result.posY, 1);
-				//body.MovePosition (new Vector2(result.posX, result.posY));
+				body.MovePosition (new Vector2(result.posX, result.posY));
 			}
 		}
 	}
