@@ -172,10 +172,32 @@ public class PlayerMovement : NetworkBehaviour {
 	private void Update()
 	{
 		if (!isLocalPlayer) return;
-		clientInputCache.inputXCache = Input.GetAxis("Horizontal");
-		clientInputCache.inputYCache = Input.GetAxis("Vertical");
+		if(Input.GetAxis("Horizontal") > 0)
+        {
+            clientInputCache.inputXCache = 0.5f;
+        } else if(Input.GetAxis("Horizontal") < 0)
+        {
+            clientInputCache.inputXCache = -0.5f;
+        } else
+        {
+            clientInputCache.inputXCache = 0;
+        }
 
-		AimAtCamera ();
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            clientInputCache.inputYCache = 0.5f;
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            clientInputCache.inputYCache = -0.5f;
+        }
+        else
+        {
+            clientInputCache.inputYCache = 0;
+        }
+
+
+        AimAtCamera ();
 	}
 	/// <summary>
 	/// Aims at the camera.
@@ -197,7 +219,7 @@ public class PlayerMovement : NetworkBehaviour {
 	public void CmdSendInput(PlayerInput input)
 	{
         //Called on the server.
-        Debug.Log("Input received: " + input.timeStamp);
+        //Debug.Log("Input received: " + input.timeStamp);
 		serverInputCache = input;
 	}
 	/// <summary>
