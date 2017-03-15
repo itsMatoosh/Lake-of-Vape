@@ -102,9 +102,9 @@ public class PlayerMovement : NetworkBehaviour {
 	private void FixedUpdate()
 	{
 		if (isServer) {
-			//Sending predictions for the last fixedupodate simulations.
-			resultCache.posX = transform.position.x;
-			resultCache.posY = transform.position.y;
+            //Sending predictions for the last fixedupodate simulations.
+            resultCache.posX = body.position.x;
+			resultCache.posY = body.position.y;
             currentResult = resultCache;
 
 
