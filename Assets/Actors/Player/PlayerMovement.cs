@@ -206,10 +206,14 @@ public class PlayerMovement : NetworkBehaviour {
 		if (!isServer) {
             //Checking if the results match between client and the server.
             Result matchingClientResult = new Result();
-			for (int i = clientResults.Count - 1; i >= 0; i--) {
+			for (int i = 0; i < clientResults.Count; i++) {
+                Debug.Log("Client result # " + i);
+                Debug.Log(" x: " + clientResults[i].posX);
+                Debug.Log(" time: " + clientResults[i].timeStamp);
 				if(clientResults[i].posX == result.posX)
 				{
-					matchingClientResult = clientResults[i];
+                    Debug.Log("[CHOSEN]");
+					matchingClientResult = clientResults[i - 3];
 				}
 			}
 
