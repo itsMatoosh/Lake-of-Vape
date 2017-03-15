@@ -80,6 +80,7 @@ public class Player : NetworkBehaviour {
 		NetworkServer.Spawn((GameObject)Instantiate (deathEffect, transform.position, Quaternion.identity));
 		GetComponent<PlayerMovement> ().canMove = false;
 		GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
+		Destroy (CameraFollow.instance.gameObject);
 		StartCoroutine (Respawn());
 	}
 	[Server]
