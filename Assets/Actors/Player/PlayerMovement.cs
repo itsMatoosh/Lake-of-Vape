@@ -185,7 +185,8 @@ public class PlayerMovement : NetworkBehaviour {
 	[Command]
 	public void CmdSendInput(PlayerInput input)
 	{
-		//Called on the server.
+        //Called on the server.
+        Debug.Log("Input received: " + input.timeStamp);
 		serverInputCache = input;
 	}
 	/// <summary>
