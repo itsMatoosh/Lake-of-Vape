@@ -18,7 +18,7 @@ public class PlayerMovement : NetworkBehaviour {
 	/// <summary>
 	/// Input of the player.
 	/// </summary>
-	public class PlayerInput
+	public struct PlayerInput
 	{
 		/// <summary>
 		/// Cache of X input.
@@ -41,7 +41,7 @@ public class PlayerMovement : NetworkBehaviour {
 	/// <summary>
 	/// Used to verify the position predicted by client.
 	/// </summary>
-	public class Result {
+	public struct Result {
 		/// <summary>
 		/// Server side player x position.
 		/// </summary>
@@ -74,10 +74,12 @@ public class PlayerMovement : NetworkBehaviour {
 	/// Server side.
 	/// </summary>
 	public PlayerInput serverInputCache = new PlayerInput();
-	/// <summary>
-	/// Cache of the server result.
-	/// </summary>
-	public Result resultCache = null;
+    /// <summary>
+    /// Cache of the server result.
+    /// </summary>
+    public Result resultCache;
+    [SyncVar(hook = "OnResultReceive")]
+    public Result currentResult;
 	/// <summary>
 	/// Whether the player can move.
 	/// </summary>
@@ -101,12 +103,10 @@ public class PlayerMovement : NetworkBehaviour {
 	{
 		if (isServer) {
 			//Sending predictions for the last fixedupodate simulations.
-			if(resultCache != null)
-			{
-				resultCache.posX = transform.position.x;
-				resultCache.posY = transform.position.y;
-				RpcOnResultsReceived(resultCache);
-			}
+			resultCache.posX = transform.position.x;
+			resultCache.posY = transform.position.y;
+            currentResult = resultCache;
+
 
 			//Simulating on...
 			if (canMove) {
@@ -192,8 +192,7 @@ public class PlayerMovement : NetworkBehaviour {
 	/// Called when the server sends the simulation results.
 	/// </summary>
 	/// <param name="result"></param>
-	[ClientRpc]
-	public void RpcOnResultsReceived(Result result)
+	public void OnResultReceive(Result result)
 	{
 		if (!isLocalPlayer) {
 			if (isServer) {
@@ -205,8 +204,8 @@ public class PlayerMovement : NetworkBehaviour {
 		}
 
 		if (!isServer) {
-			//Checking if the results match between client and the server.
-			Result matchingClientResult = null;
+            //Checking if the results match between client and the server.
+            Result matchingClientResult = new Result();
 			for (int i = 0; i < clientResults.Count; i++) {
 				if(clientResults[i].timeStamp == result.timeStamp)
 				{
@@ -214,11 +213,11 @@ public class PlayerMovement : NetworkBehaviour {
 				}
 			}
 
-			if(matchingClientResult == null)
+			/*if(matchingClientResult == null)
 			{
 				Debug.LogError("No matching client simulation samples! ");
 				return;
-			}
+			}*/
 
 			if(result.posX != matchingClientResult.posX || result.posY != matchingClientResult.posY)
 			{
