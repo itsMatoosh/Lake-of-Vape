@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-[NetworkSettings(channel=1,sendInterval= 0.03f)]
+[NetworkSettings(channel=1,sendInterval= 0.015f)]
 public class PlayerMovement : NetworkBehaviour {
 
 	/// <summary>
