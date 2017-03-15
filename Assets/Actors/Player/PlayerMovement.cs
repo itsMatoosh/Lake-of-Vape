@@ -121,7 +121,7 @@ public class PlayerMovement : NetworkBehaviour {
 				timeStamp = serverInputCache.timeStamp,
 				rotation = serverInputCache.rotation
 			};
-			//serverInputCache = new PlayerInput();
+			serverInputCache = new PlayerInput();
 		}
 		if (isLocalPlayer)
 		{
@@ -151,7 +151,7 @@ public class PlayerMovement : NetworkBehaviour {
 			}
 
 			//Resetting the input.
-			clientInputCache = new PlayerInput();
+			//clientInputCache = new PlayerInput();
 		}
 	}
 
