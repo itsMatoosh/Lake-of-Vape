@@ -109,13 +109,14 @@ public class PlayerMovement : NetworkBehaviour {
             //Sending predictions for the last fixedupodate simulations.
             resultCache.posX = body.position.x;
 			resultCache.posY = body.position.y;
-            serverResults.Add(resultCache);
+            currentResult = resultCache;
+            //serverResults.Add(resultCache);
             
-            if(serverResults.Count == 4)
+            /*if(serverResults.Count == 4)
             {
                 currentResult = serverResults[0];
                 serverResults.RemoveAt(0);
-            }
+            }*/
 
 
 			//Simulating on...
@@ -131,7 +132,7 @@ public class PlayerMovement : NetworkBehaviour {
 				timeStamp = serverInputCache.timeStamp,
 				rotation = serverInputCache.rotation
 			};
-			serverInputCache = new PlayerInput();
+			//serverInputCache = new PlayerInput();
 		}
 		if (isLocalPlayer)
 		{
@@ -234,8 +235,8 @@ public class PlayerMovement : NetworkBehaviour {
 			{
 				Debug.LogError("SERVER-CLIENT MISMATCH!!!");
 				Debug.Log("Server: " + result.posX + "/ " + result.timeStamp + " Client: " + matchingClientResult.posX + "/" + matchingClientResult.timeStamp);
-				transform.position.Set (result.posX, result.posY, 1);
-				body.MovePosition (new Vector2(result.posX, result.posY));
+				//transform.position.Set (result.posX, result.posY, 1);
+				//body.MovePosition (new Vector2(result.posX, result.posY));
 			}
 		}
 	}
